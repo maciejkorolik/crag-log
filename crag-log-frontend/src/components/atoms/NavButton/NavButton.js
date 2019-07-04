@@ -6,7 +6,7 @@ const StyledWrapper = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ active }) => (active ? '#C7D3AF' : 'transparent')};
+  background-color: ${({ active }) => (active ? ({ theme }) => theme.color2 : 'transparent')};
   text-decoration: none;
   padding: 0;
   width: 220px;
@@ -14,6 +14,9 @@ const StyledWrapper = styled.button`
   border: none;
   border-radius: 50px;
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const StyledIcon = styled.div`

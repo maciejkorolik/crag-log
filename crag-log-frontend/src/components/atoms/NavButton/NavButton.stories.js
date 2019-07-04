@@ -11,7 +11,7 @@ const GreenBackground = styled.div`
   align-items: center;
   width: 500px;
   height: 300px;
-  background: #91a250;
+  background: ${({ theme }) => theme.color1};
 `;
 
 storiesOf('Atoms/NavButton', module)
