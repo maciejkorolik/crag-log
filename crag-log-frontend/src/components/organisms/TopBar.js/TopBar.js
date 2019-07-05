@@ -7,19 +7,23 @@ import logoIcon from 'assets/icons/logo.svg';
 import NavButton from 'components/atoms/NavButton/NavButton';
 
 const StyledWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 120px;
+  height: 100px;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 30px;
   background-color: ${({ theme }) => theme.color1};
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
 `;
 
 const StyledLogo = styled.div`
   display: block;
-  width: 241px;
-  height: 70px;
+  width: 171px;
+  height: 50px;
   background-image: url(${logoIcon});
   background-repeat: no-repeat;
   background-position: 50% 50%;

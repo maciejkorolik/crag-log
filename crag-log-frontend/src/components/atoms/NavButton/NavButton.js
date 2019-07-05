@@ -9,8 +9,8 @@ const StyledWrapper = styled.button`
   background-color: ${({ active }) => (active ? ({ theme }) => theme.color2 : 'transparent')};
   text-decoration: none;
   padding: 0;
-  width: 220px;
-  height: 70px;
+  width: 150px;
+  height: 50px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -21,8 +21,8 @@ const StyledWrapper = styled.button`
 
 const StyledIcon = styled.div`
   display: block;
-  width: 50px;
-  height: 40px;
+  width: 35px;
+  height: 30px;
   margin-right: 15px;
   background-image: url(${({ icon }) => icon});
   background-repeat: no-repeat;
@@ -35,7 +35,7 @@ const StyledText = styled.div`
   color: ${({ theme }) => theme.darkgrey};
   font-family: 'Oswald', sans-serif;
   line-height: 1;
-  font-size: ${({ theme }) => theme.fontSize.xl};
+  font-size: 30px;
   font-weight: ${({ theme }) => theme.light};
 `;
 
