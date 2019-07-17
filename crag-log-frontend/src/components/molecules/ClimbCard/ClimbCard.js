@@ -163,7 +163,9 @@ class ClimbCard extends Component {
               {style}
             </Paragraph>
           </div>
-          <StyledButton secondary onClick={this.handleCardClick}>see more</StyledButton>
+          <StyledButton secondary onClick={this.handleCardClick}>
+            see more
+          </StyledButton>
         </InnerWrapper>
       </StyledWrapper>
     );

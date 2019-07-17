@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { routes } from 'routes';
+import store from 'store';
 import MainTemplate from 'templates/MainTemplate';
 import Climbs from 'views/Climbs';
 import Stats from 'views/Stats';
 import ClimbDetails from 'views/ClimbDetails';
 
 const Root = () => (
+  <Provider store={store}>
   <BrowserRouter>
     <MainTemplate>
       <Switch>
@@ -17,6 +20,7 @@ const Root = () => (
       </Switch>
     </MainTemplate>
   </BrowserRouter>
+  </Provider>
 );
 
 export default Root;
