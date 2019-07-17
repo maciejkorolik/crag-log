@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
@@ -61,9 +62,15 @@ const StyledButton = styled(Button)`
 `;
 
 class ClimbCard extends Component {
+  state = {
+    redirect: false,
+  };
+
+  handleCardClick = () => this.setState({ redirect: true });
+
   render() {
     const { climb } = this.props;
-    const { name, grade, date, location, crag, type, style } = climb;
+    const { id, name, grade, date, location, crag, type, style } = climb;
     const color = () => {
       switch (grade) {
         case '4':
@@ -121,6 +128,12 @@ class ClimbCard extends Component {
       }
     };
 
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to={`climbs/details/${id}`} />;
+    }
+
     return (
       <StyledWrapper>
         <InnerWrapper top>
@@ -150,7 +163,7 @@ class ClimbCard extends Component {
               {style}
             </Paragraph>
           </div>
-          <StyledButton secondary>see more</StyledButton>
+          <StyledButton secondary onClick={this.handleCardClick}>see more</StyledButton>
         </InnerWrapper>
       </StyledWrapper>
     );
