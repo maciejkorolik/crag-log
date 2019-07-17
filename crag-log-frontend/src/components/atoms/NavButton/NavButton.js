@@ -1,12 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyledWrapper = styled.button`
+const StyledButton = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ active }) => (active ? ({ theme }) => theme.color2 : 'transparent')};
+  background-color: transparent;
   text-decoration: none;
   padding: 0;
   width: 150px;
@@ -16,6 +17,9 @@ const StyledWrapper = styled.button`
   cursor: pointer;
   &:focus {
     outline: none;
+  }
+  &.active {
+    background-color: ${({ theme }) => theme.color2};
   }
 `;
 
@@ -39,21 +43,21 @@ const StyledText = styled.div`
   font-weight: ${({ theme }) => theme.light};
 `;
 
-const NavButton = ({ className, icon, children }) => (
-  <StyledWrapper active={className}>
+const NavButton = ({ to, icon, children }) => (
+  <StyledButton to={to} activeClassName="active">
     <StyledIcon icon={icon} />
     <StyledText>{children}</StyledText>
-  </StyledWrapper>
+  </StyledButton>
 );
 
 NavButton.propTypes = {
-  className: PropTypes.string,
+  to: PropTypes.string,
   icon: PropTypes.string,
   children: PropTypes.string,
 };
 
 NavButton.defaultProps = {
-  className: null,
+  to: null,
   icon: null,
   children: null,
 };

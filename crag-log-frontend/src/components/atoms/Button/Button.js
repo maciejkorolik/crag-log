@@ -16,6 +16,11 @@ const Button = styled.button`
   font-weight: ${({ theme }) => theme.regular};
   font-size: ${({ theme }) => theme.fontSize.s};
   text-transform: uppercase;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 
   ${({ secondary }) =>
     secondary &&

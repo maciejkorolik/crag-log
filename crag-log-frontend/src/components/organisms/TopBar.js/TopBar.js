@@ -1,9 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+
 import styled from 'styled-components';
 import routesIcon from 'assets/icons/routes.svg';
 import statsIcon from 'assets/icons/stats.svg';
 import logoIcon from 'assets/icons/logo.svg';
+import logoutIcon from 'assets/icons/logout.svg';
 import NavButton from 'components/atoms/NavButton/NavButton';
 
 const StyledWrapper = styled.div`
@@ -18,6 +19,7 @@ const StyledWrapper = styled.div`
   padding: 0 30px;
   background-color: ${({ theme }) => theme.color1};
   box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
 `;
 
 const StyledLogo = styled.div`
@@ -38,22 +40,43 @@ const StyledNavList = styled.ul`
   list-style: none;
 `;
 
+const StyledLogoutButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color2};
+  background-image: url(${({ icon }) => icon});
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 50% 50%;
+  text-decoration: none;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+`;
+
 const TopBar = () => (
   <StyledWrapper>
     <StyledLogo />
     <StyledNavList>
       <li>
-        <NavButton as={NavLink} to="/climbs" icon={routesIcon} activeclass="active">
+        <NavButton to="/climbs" icon={routesIcon} activeClassName="active">
           Routes
         </NavButton>
       </li>
       <li>
-        <NavButton as={NavLink} to="/stats" icon={statsIcon} activeclass="active">
+        <NavButton to="/stats" icon={statsIcon} activeClassName="active">
           Stats
         </NavButton>
       </li>
     </StyledNavList>
-    {/* <StyledLogoutButton /> */}
+    <StyledLogoutButton icon={logoutIcon} />
   </StyledWrapper>
 );
 
