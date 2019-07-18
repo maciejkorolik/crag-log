@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 const Paragraph = styled.p`
-  margin: 0 8px;
-  font-size: ${({ theme }) => theme.fontSize.s};
+  margin: 0 10px;
+  font-size: ${({ theme }) => theme.fontSize.m};
   font-weight: ${({ theme }) => theme.regular};
   ${({ bigger }) =>
     bigger &&

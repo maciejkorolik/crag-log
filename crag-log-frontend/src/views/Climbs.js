@@ -7,8 +7,14 @@ import ClimbCard from 'components/molecules/ClimbCard/ClimbCard';
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-gap: 30px;
-  margin: 20px;
+  grid-gap: 20px;
+  margin: 50px;
+`;
+
+const StyledWrapper = styled.div`
+  width: 100%;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
 `;
 
 // const climbs = [
@@ -100,11 +106,13 @@ const Grid = styled.div`
 
 const Climbs = ({ climbs }) => (
   <AppTemplate>
-    <Grid>
-      {climbs.map(climb => (
-        <ClimbCard id={climb.id} climb={climb} key={climb.id} />
-      ))}
-    </Grid>
+    <StyledWrapper>
+      <Grid>
+        {climbs.map(climb => (
+          <ClimbCard id={climb.id} climb={climb} key={climb.id} />
+        ))}
+      </Grid>
+    </StyledWrapper>
   </AppTemplate>
 );
 

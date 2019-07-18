@@ -12,11 +12,11 @@ const Button = styled.button`
   height: 50px;
   border: none;
   border-radius: 50px;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: ${({ theme }) => theme.regular};
-  font-size: ${({ theme }) => theme.fontSize.s};
-  text-transform: uppercase;
+  font-size: ${({ theme }) => theme.fontSize.m};
   cursor: pointer;
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); */
 
   &:focus {
     outline: none;
@@ -25,11 +25,12 @@ const Button = styled.button`
   ${({ secondary }) =>
     secondary &&
     css`
-      background-color: ${({ theme }) => theme.color5};
+      background-color: ${({ theme }) => theme.color2};
       color: ${({ theme }) => theme.darkgrey};
-      width: 110px;
-      height: 35px;
-      font-size: ${({ theme }) => theme.fontSize.xs};
+      width: 121px;
+      height: 33px;
+      font-weight: ${({ theme }) => theme.semibold};
+      font-size: ${({ theme }) => theme.fontSize.s};
     `}
 `;
 

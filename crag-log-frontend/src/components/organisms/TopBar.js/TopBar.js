@@ -2,7 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components';
 import routesIcon from 'assets/icons/routes.svg';
+import activeRoutesIcon from 'assets/icons/activeroutes.svg';
 import statsIcon from 'assets/icons/stats.svg';
+import activeStatsIcon from 'assets/icons/activestats.svg';
 import logoIcon from 'assets/icons/logo.svg';
 import logoutIcon from 'assets/icons/logout.svg';
 import NavButton from 'components/atoms/NavButton/NavButton';
@@ -14,7 +16,7 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: 70px;
   width: 100%;
   padding: 0 30px;
   background-color: ${({ theme }) => theme.color1};
@@ -24,8 +26,8 @@ const StyledWrapper = styled.div`
 
 const StyledLogo = styled.div`
   display: block;
-  width: 171px;
-  height: 50px;
+  width: 190px;
+  height: 36px;
   background-image: url(${logoIcon});
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -66,12 +68,12 @@ const TopBar = () => (
     <StyledLogo />
     <StyledNavList>
       <li>
-        <NavButton to="/climbs" icon={routesIcon} activeClassName="active">
+        <NavButton to="/climbs" icon={routesIcon} activeIcon={activeRoutesIcon} activeClassName="active">
           Routes
         </NavButton>
       </li>
       <li>
-        <NavButton to="/stats" icon={statsIcon} activeClassName="active">
+        <NavButton to="/stats" icon={statsIcon} activeIcon={activeStatsIcon} activeClassName="active">
           Stats
         </NavButton>
       </li>

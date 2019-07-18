@@ -3,9 +3,7 @@ import styled from 'styled-components';
 // import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import AppTemplate from 'templates/AppTemplate';
-import Heading from 'components/atoms/Heading/Heading';
-import Paragraph from 'components/atoms/Paragraph/Paragraph';
-// import Button from 'components/atoms/Button/Button';
+import ClimbCard from 'components/molecules/ClimbCard/ClimbCard';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -15,47 +13,23 @@ const StyledWrapper = styled.div`
   padding: 30px;
 `;
 
-const DetailsPanel = styled.div`
-  width: 100%;
-  max-width: 650px;
-  min-height: 450px;
-  background-color: ${({ theme }) => theme.color2};
-  border-radius: 30px;
-  padding: 20px 30px;
-`;
-const StyledSpan = styled.span`
-  font-weight: ${({ theme }) => theme.medium};
-  padding-right: 8px;
-`;
+const climb = {
+  id: 3,
+  name: 'nazwa drogi',
+  grade: '6b+',
+  date: '25.07.19',
+  location: 'Świebodzice',
+  crag: 'Pełcznica',
+  type: 'lead',
+  style: 'OS',
+  description:
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+};
 
 const DetailsTemplate = () => (
   <AppTemplate>
     <StyledWrapper>
-      <DetailsPanel>
-        <Heading big>Details</Heading>
-        <div>
-          <Paragraph bigger>
-            <StyledSpan>Date:</StyledSpan>
-            asdf
-          </Paragraph>
-          <Paragraph bigger>
-            <StyledSpan>Location:</StyledSpan>
-            asdfasdf
-          </Paragraph>
-          <Paragraph bigger>
-            <StyledSpan>Crag:</StyledSpan>
-            asdfasdfas
-          </Paragraph>
-          <Paragraph bigger>
-            <StyledSpan>Type:</StyledSpan>
-            asdfasdfasd
-          </Paragraph>
-          <Paragraph bigger>
-            <StyledSpan>Style:</StyledSpan>
-            asdfasdfasd
-          </Paragraph>
-        </div>
-      </DetailsPanel>
+      <ClimbCard details climb={climb} />
     </StyledWrapper>
   </AppTemplate>
 );

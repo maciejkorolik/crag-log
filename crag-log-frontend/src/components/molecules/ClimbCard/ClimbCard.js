@@ -9,11 +9,18 @@ import Button from 'components/atoms/Button/Button';
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 320px;
-  box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
   border-radius: 15px;
   position: relative;
-  display: grid;
-  background-color: ${({ theme }) => theme.color2};
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.white};
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
+  ${({ details }) =>
+    details &&
+    css`
+      max-width: 1000px;
+      min-height: 650px;
+    `}
 `;
 
 const InnerWrapper = styled.div`
@@ -23,33 +30,38 @@ const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 20px;
-  padding-bottom: 20px;
+  height: 100%;
+  padding: 20px;
 
-  ${({ top }) =>
+  ${({ top}) =>
     top &&
     css`
-      padding-bottom: 0;
+      border-radius: 15px 15px 0 0;
+      padding: 0 20px;
       height: 70px;
-      background-color: ${({ theme }) => theme.color1};
+      background-color: ${({ theme }) => theme.color3};
+      flex-direction: row;
+      justify-content: ${({ details }) => details ? 'center' : 'flex-start'};
+      align-items: center;
     `}
+
 `;
 
 const Grade = styled.div`
   position: absolute;
   top: -10px;
-  right: 15px;
+  right: ${({ details }) => details ? '30px' : '15px'};
   width: 90px;
   height: 90px;
   border-radius: 50px;
-  background-color: ${({ color }) => color};
+  background-color: ${({ gradeColor }) => gradeColor};
+  color: ${({ theme }) => theme.color1};
   display: flex;
-  border: 5px solid ${({ theme }) => theme.color1};
   justify-content: center;
   align-items: center;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: ${({ theme }) => theme.fontSize.xl};
-  font-weight: ${({ theme }) => theme.bold};
+  font-weight: ${({ theme }) => theme.semibold};
 `;
 
 const StyledSpan = styled.span`
@@ -58,20 +70,23 @@ const StyledSpan = styled.span`
 `;
 
 const StyledButton = styled(Button)`
-  align-self: center;
+  align-self: flex-end;
 `;
 
 class ClimbCard extends Component {
   state = {
     redirect: false,
+    closeCard: false
   };
 
   handleCardClick = () => this.setState({ redirect: true });
+  handleCardClose = () => this.setState({ closeCard: true })
 
   render() {
-    const { climb } = this.props;
+    const { climb, details } = this.props;
     const { id, name, grade, date, location, crag, type, style } = climb;
-    const color = () => {
+    let button;
+    const gradeColor = () => {
       switch (grade) {
         case '4':
         case '4+':
@@ -81,13 +96,14 @@ class ClimbCard extends Component {
         case '4b+':
         case '4c':
         case '4c+':
+          return '#E5D9D5';
         case '5':
         case '5+':
         case '5a':
         case '5a+':
         case '5b':
         case '5b+':
-          return 'green';
+          return '#C1AAA1';
         case '5c':
         case '5c+':
         case '6':
@@ -101,7 +117,7 @@ class ClimbCard extends Component {
         case '7+':
         case '7a':
         case '7a+':
-          return 'yellow';
+          return '#C69683';
         case '7b':
         case '7b+':
         case '7c':
@@ -122,25 +138,38 @@ class ClimbCard extends Component {
         case '9b+':
         case '9c':
         case '9c+':
-          return 'red';
+          return '#C37859';
         default:
-          return 'grey';
+          return 'white';
       }
     };
 
-    const { redirect } = this.state;
+    const { redirect, closeCard } = this.state;
 
     if (redirect) {
-      return <Redirect to={`climbs/details/${id}`} />;
+      return <Redirect to={`/climbs/details/${id}`} />;
+    }
+    if (closeCard) {
+      return <Redirect to='/climbs' />;
+    }
+
+    if (details) {
+      button = (<StyledButton secondary onClick={this.handleCardClose} >
+        Go back
+          </StyledButton>);
+    } else {
+      button = (<StyledButton secondary onClick={this.handleCardClick}>
+        See more
+          </StyledButton>);
     }
 
     return (
-      <StyledWrapper>
-        <InnerWrapper top>
-          <Heading>{name}</Heading>
-          <Grade color={color}>{grade}</Grade>
+      <StyledWrapper details={details} >
+        <InnerWrapper top details={details} >
+          <Heading light>{name}</Heading>
+          <Grade gradeColor={gradeColor} details={details} >{grade}</Grade>
         </InnerWrapper>
-        <InnerWrapper>
+        <InnerWrapper details={details} >
           <div>
             <Paragraph>
               <StyledSpan>Date:</StyledSpan>
@@ -163,9 +192,7 @@ class ClimbCard extends Component {
               {style}
             </Paragraph>
           </div>
-          <StyledButton secondary onClick={this.handleCardClick}>
-            see more
-          </StyledButton>
+          {button}
         </InnerWrapper>
       </StyledWrapper>
     );
@@ -188,10 +215,4 @@ ClimbCard.propTypes = {
 
 export default ClimbCard;
 
-//    name: null,
-//   grade: null,
-//   date: null,
-//   location: null,
-//   crag: null,
-//   type: null,
-//   style: null
+

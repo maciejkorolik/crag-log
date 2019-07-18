@@ -6,7 +6,7 @@ import TopBar from 'components/organisms/TopBar.js/TopBar';
 
 const StyledWrapper = styled.div`
   margin: 0;
-  padding-top: 120px;
+  padding-top: 70px;
   width: 100%;
   height: 100%;
   min-height: 100vh;

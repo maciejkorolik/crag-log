@@ -11,7 +11,7 @@ const StyledButton = styled(NavLink)`
   text-decoration: none;
   padding: 0;
   width: 150px;
-  height: 50px;
+  height: 38px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -25,27 +25,34 @@ const StyledButton = styled(NavLink)`
 
 const StyledIcon = styled.div`
   display: block;
-  width: 35px;
-  height: 30px;
-  margin-right: 15px;
+  width: 25px;
+  height: 24px;
+  margin-right: 7px;
   background-image: url(${({ icon }) => icon});
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 100% 100%;
   border: none;
+  ${StyledButton}.active & {
+    background-image: url(${({ activeIcon }) => activeIcon});
+  }
 `;
 
 const StyledText = styled.div`
-  color: ${({ theme }) => theme.darkgrey};
-  font-family: 'Oswald', sans-serif;
+  color: ${({ theme }) => theme.white};
+  font-family: 'Open Sans', sans-serif;
   line-height: 1;
-  font-size: 30px;
-  font-weight: ${({ theme }) => theme.light};
+  font-size: 20px;
+  font-weight: ${({ theme }) => theme.semibold};
+
+  ${StyledButton}.active & {
+    color: ${({ theme }) => theme.color1};
+  }
 `;
 
-const NavButton = ({ to, icon, children }) => (
+const NavButton = ({ to, icon, activeIcon, children }) => (
   <StyledButton to={to} activeClassName="active">
-    <StyledIcon icon={icon} />
+    <StyledIcon icon={icon} activeIcon={activeIcon} />
     <StyledText>{children}</StyledText>
   </StyledButton>
 );
@@ -53,12 +60,14 @@ const NavButton = ({ to, icon, children }) => (
 NavButton.propTypes = {
   to: PropTypes.string,
   icon: PropTypes.string,
+  activeIcon: PropTypes.string,
   children: PropTypes.string,
 };
 
 NavButton.defaultProps = {
   to: null,
   icon: null,
+  activeIcon: null,
   children: null,
 };
 
