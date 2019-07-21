@@ -6,10 +6,13 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import Grade from 'components/atoms/Grade/Grade';
+import { connect } from 'react-redux';
+import { removeItem as removeItemAction } from 'actions';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  min-height: 280px;
+  max-width: 800px;
+  min-height: 450px;
   border-radius: 15px;
   position: relative;
   display: flex;
@@ -52,21 +55,25 @@ const StyledButton = styled(Button)`
 
 class ClimbCard extends Component {
   state = {
-    redirect: false,
+    closeCard: false,
   };
 
-  handleCardClick = () => this.setState({ redirect: true });
+  handleCardClose = () => this.setState({ closeCard: true });
+
+  handleItemDelete = (removeItem, id) => {
+    removeItem(id);
+    this.handleCardClose();
+  };
 
   render() {
-    const { climb } = this.props;
-    const { id, name, grade, date, location, crag, type } = climb;
+    const { climb, removeItem } = this.props;
+    const { id, name, grade, date, location, crag, type, description } = climb;
 
-    const { redirect } = this.state;
+    const { closeCard } = this.state;
 
-    if (redirect) {
-      return <Redirect to={`/climbs/details/${id}`} />;
+    if (closeCard) {
+      return <Redirect to="/climbs" />;
     }
-
     return (
       <StyledWrapper>
         <InnerWrapper top>
@@ -91,9 +98,22 @@ class ClimbCard extends Component {
               <StyledSpan>Type:</StyledSpan>
               {type}
             </Paragraph>
+            <Paragraph>
+              <StyledSpan>Description:</StyledSpan>
+            </Paragraph>
+            <Paragraph>{description}</Paragraph>
           </div>
-          <StyledButton secondary onClick={this.handleCardClick}>
-            See more
+          <StyledButton
+            secondary
+            onClick={() => {
+              if (window.confirm('Are you sure you wish to delete this item?'))
+                this.handleItemDelete(removeItem, id);
+            }}
+          >
+            Delete
+          </StyledButton>
+          <StyledButton secondary onClick={this.handleCardClose}>
+            Go back
           </StyledButton>
         </InnerWrapper>
       </StyledWrapper>
@@ -110,8 +130,17 @@ ClimbCard.propTypes = {
       location: PropTypes.string.isRequired,
       crag: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  removeItem: PropTypes.func.isRequired,
 };
 
-export default ClimbCard;
+const mapDispatchToProps = dispatch => ({
+  removeItem: id => dispatch(removeItemAction(id)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(ClimbCard);

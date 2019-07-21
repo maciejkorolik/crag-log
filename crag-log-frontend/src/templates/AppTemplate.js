@@ -12,6 +12,7 @@ const StyledWrapper = styled.div`
   min-height: 100vh;
   background-image: url(${backgroundPattern});
   background-attachment: fixed;
+  position: relative;
 `;
 
 const AppTemplate = ({ children }) => (

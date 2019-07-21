@@ -88,7 +88,20 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case 'ADD_ITEM':
+      return {
+        ...state,
+        climbs: [...state.climbs, action.payload.item],
+      };
+    case 'REMOVE_ITEM':
+      return {
+        ...state,
+        climbs: [...state.climbs.filter(item => item.id !== action.payload.id)],
+      };
+    default:
+      return state;
+  }
 };
 
 export default rootReducer;

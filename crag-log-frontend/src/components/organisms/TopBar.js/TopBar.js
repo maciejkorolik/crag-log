@@ -8,6 +8,7 @@ import activeStatsIcon from 'assets/icons/activestats.svg';
 import logoIcon from 'assets/icons/logo.svg';
 import logoutIcon from 'assets/icons/logout.svg';
 import NavButton from 'components/atoms/NavButton/NavButton';
+import IconButton from 'components/atoms/IconButton/IconButton';
 
 const StyledWrapper = styled.div`
   position: fixed;
@@ -42,43 +43,32 @@ const StyledNavList = styled.ul`
   list-style: none;
 `;
 
-const StyledLogoutButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.color2};
-  background-image: url(${({ icon }) => icon});
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: 50% 50%;
-  text-decoration: none;
-  padding: 0;
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  &:focus {
-    outline: none;
-  }
-`;
-
 const TopBar = () => (
   <StyledWrapper>
     <StyledLogo />
     <StyledNavList>
       <li>
-        <NavButton to="/climbs" icon={routesIcon} activeIcon={activeRoutesIcon} activeClassName="active">
+        <NavButton
+          to="/climbs"
+          icon={routesIcon}
+          activeIcon={activeRoutesIcon}
+          activeClassName="active"
+        >
           Routes
         </NavButton>
       </li>
       <li>
-        <NavButton to="/stats" icon={statsIcon} activeIcon={activeStatsIcon} activeClassName="active">
+        <NavButton
+          to="/stats"
+          icon={statsIcon}
+          activeIcon={activeStatsIcon}
+          activeClassName="active"
+        >
           Stats
         </NavButton>
       </li>
     </StyledNavList>
-    <StyledLogoutButton icon={logoutIcon} />
+    <IconButton icon={logoutIcon} />
   </StyledWrapper>
 );
 

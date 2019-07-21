@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import AppTemplate from 'templates/AppTemplate';
-import ClimbCard from 'components/molecules/ClimbCard/ClimbCard';
+import DetailsPanel from 'components/organisms/DetailsPanel/DetailsPanel';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -29,7 +29,7 @@ const climb = {
 const DetailsTemplate = () => (
   <AppTemplate>
     <StyledWrapper>
-      <ClimbCard details climb={climb} />
+      <DetailsPanel climb={climb} />
     </StyledWrapper>
   </AppTemplate>
 );

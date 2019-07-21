@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import AppTemplate from 'templates/AppTemplate';
 import ClimbCard from 'components/molecules/ClimbCard/ClimbCard';
+import NewItemPanel from 'components/organisms/NewItemPanel/NewItemPanel';
+import IconButton from 'components/atoms/IconButton/IconButton';
+import plusIcon from 'assets/icons/plus.svg';
 
 const Grid = styled.div`
   display: grid;
@@ -16,105 +20,60 @@ const StyledWrapper = styled.div`
   height: calc(100vh - 70px);
   overflow-y: auto;
 `;
+const NewItemButton = styled(IconButton)`
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 60px;
+  height: 60px;
+  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+`;
 
-// const climbs = [
-//   {
-//     id: 1,
-//     name: 'nazwa drogi',
-//     grade: '5a+',
-//     date: '25.07.19',
-//     location: 'Świebodzice',
-//     crag: 'Pełcznica',
-//     type: 'lead',
-//     style: 'OS',
-//     description:
-//       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-//   },
-//   {
-//     id: 2,
-//     name: 'nazwa drogi',
-//     grade: '4b',
-//     date: '25.07.19',
-//     location: 'Świebodzice',
-//     crag: 'Pełcznica',
-//     type: 'lead',
-//     style: 'OS',
-//     description:
-//       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-//   },
-//   {
-//     id: 3,
-//     name: 'nazwa drogi',
-//     grade: '6b+',
-//     date: '25.07.19',
-//     location: 'Świebodzice',
-//     crag: 'Pełcznica',
-//     type: 'lead',
-//     style: 'OS',
-//     description:
-//       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-//   },
-//   {
-//     id: 4,
-//     name: 'nazwa drogi',
-//     grade: '8c',
-//     date: '25.07.19',
-//     location: 'Świebodzice',
-//     crag: 'Pełcznica',
-//     type: 'lead',
-//     style: 'OS',
-//     description:
-//       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-//   },
-//   {
-//     id: 5,
-//     name: 'nazwa drogi',
-//     grade: '4c',
-//     date: '25.07.19',
-//     location: 'Świebodzice',
-//     crag: 'Pełcznica',
-//     type: 'lead',
-//     style: 'OS',
-//     description:
-//       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-//   },
-//   {
-//     id: 6,
-//     name: 'nazwa drogi',
-//     grade: '7a',
-//     date: '25.07.19',
-//     location: 'Świebodzice',
-//     crag: 'Pełcznica',
-//     type: 'lead',
-//     style: 'OS',
-//     description:
-//       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-//   },
-//   {
-//     id: 7,
-//     name: 'nazwa drogi',
-//     grade: '6b+',
-//     date: '25.07.19',
-//     location: 'Świebodzice',
-//     crag: 'Pełcznica',
-//     type: 'lead',
-//     style: 'OS',
-//     description:
-//       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-//   },
-// ];
+class Climbs extends Component {
+  state = {
+    isNewItemPanelVisible: false,
+  };
 
-const Climbs = ({ climbs }) => (
-  <AppTemplate>
-    <StyledWrapper>
-      <Grid>
-        {climbs.map(climb => (
-          <ClimbCard id={climb.id} climb={climb} key={climb.id} />
-        ))}
-      </Grid>
-    </StyledWrapper>
-  </AppTemplate>
-);
+  toggleNewItemPanel = () => {
+    this.setState(prevState => ({
+      isNewItemPanelVisible: !prevState.isNewItemPanelVisible,
+    }));
+  };
+
+  render() {
+    const { climbs } = this.props;
+    const { isNewItemPanelVisible } = this.state;
+    return (
+      <AppTemplate>
+        <NewItemPanel handleClose={this.toggleNewItemPanel} isVisible={isNewItemPanelVisible} />
+        <StyledWrapper>
+          <Grid>
+            {climbs.map(climb => (
+              <ClimbCard id={climb.id} climb={climb} key={climb.id} />
+            ))}
+          </Grid>
+        </StyledWrapper>
+        <NewItemButton icon={plusIcon} onClick={this.toggleNewItemPanel} />
+      </AppTemplate>
+    );
+  }
+}
+
+Climbs.propTypes = {
+  climbs: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      grade: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      crag: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 
 const mapStateToProps = state => {
   const { climbs } = state;
@@ -122,7 +81,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Climbs);
-
-//  {climbs.map(({ id, name, grade, date, location, crag, type, style }) => (
-//          <ClimbCard id={id} name={name} grade={grade} date={date} location={location} crag={crag} type={type} style={style} key={id} />
-//       ))}
