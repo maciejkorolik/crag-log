@@ -47,9 +47,10 @@ const Grade = styled.div`
   position: absolute;
   top: -10px;
   right: ${({ details }) => (details ? '30px' : '15px')};
-  width: 90px;
-  height: 90px;
+  width: ${({ details }) => (details ? '90px' : '80px')};
+  height: ${({ details }) => (details ? '90px' : '80px')};
   border-radius: 50px;
+  margin: 0;
   background-color: ${gradeColor};
   color: ${({ theme }) => theme.color1};
   display: flex;
@@ -58,6 +59,7 @@ const Grade = styled.div`
   font-family: 'Poppins', sans-serif;
   font-size: ${({ theme }) => theme.fontSize.xl};
   font-weight: ${({ theme }) => theme.semibold};
+  line-height: 1;
 `;
 
 export default Grade;

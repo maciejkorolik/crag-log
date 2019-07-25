@@ -6,6 +6,7 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import Grade from 'components/atoms/Grade/Grade';
+import Rating from 'components/atoms/Rating/Rating';
 import { connect } from 'react-redux';
 import { removeItem as removeItemAction } from 'actions';
 
@@ -67,7 +68,7 @@ class ClimbCard extends Component {
 
   render() {
     const { climb, removeItem } = this.props;
-    const { id, name, grade, date, location, crag, type, description } = climb;
+    const { _id, name, grade, date, location, crag, type, rating, description } = climb;
 
     const { closeCard } = this.state;
 
@@ -98,6 +99,7 @@ class ClimbCard extends Component {
               <StyledSpan>Type:</StyledSpan>
               {type}
             </Paragraph>
+            <Rating value={rating} />
             <Paragraph>
               <StyledSpan>Description:</StyledSpan>
             </Paragraph>
@@ -107,7 +109,7 @@ class ClimbCard extends Component {
             secondary
             onClick={() => {
               if (window.confirm('Are you sure you wish to delete this item?'))
-                this.handleItemDelete(removeItem, id);
+                this.handleItemDelete(removeItem, _id);
             }}
           >
             Delete
@@ -130,6 +132,7 @@ ClimbCard.propTypes = {
       location: PropTypes.string.isRequired,
       crag: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
       description: PropTypes.string.isRequired,
     }),
   ).isRequired,

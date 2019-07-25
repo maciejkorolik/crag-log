@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { Input, Select, Textarea } from '@smooth-ui/core-sc';
-import Button from 'components/atoms/Button/Button';
-import Heading from 'components/atoms/Heading/Heading';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { addItem as addItemAction } from 'actions';
 import { Formik, Form } from 'formik';
+import Input from 'components/atoms/Input/Input';
+import Textarea from 'components/atoms/Textarea/Textarea';
+import Select from 'components/atoms/Select/Select';
+import Button from 'components/atoms/Button/Button';
+import Heading from 'components/atoms/Heading/Heading';
+import StarIcon from 'assets/icons/star-active.svg';
 
 const grades = [
   '4a',
@@ -47,7 +50,10 @@ const StyledWrapper = styled.div`
   height: auto;
   position: absolute;
   top: 70px;
-  left: calc(100vh - 400px);
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   z-index: 999;
   padding: 30px;
   border-radius: 0 0 30px 30px;
@@ -55,8 +61,8 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   background-color: ${({ theme }) => theme.white};
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.25);
-  transform: translateY(${({ isVisible }) => (isVisible ? '0' : '-100%')});
-  transition: transform 0.25s ease-in-out;
+  transform: translateY(${({ isVisible }) => (isVisible ? '0' : '-110%')});
+  transition: transform 0.4s ease-in-out;
 `;
 
 const Overlay = styled.div`
@@ -96,52 +102,11 @@ const StyledForm = styled(Form)`
 const HorizontalWrapper = styled.div`
   width: 100%;
   display: flex;
-  > input:first-child {
+  > *:first-child {
     margin-right: 10px;
   }
-`;
-
-const StyledInput = styled(Input)`
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: ${({ theme }) => theme.regular};
-  font-family: Poppins, sans-serif;
-  background-color: ${({ theme }) => theme.color5};
-  border-radius: 20px;
-  padding: 5px 15px;
-  margin: 10px 0;
-  width: 100%;
-  ${({ type }) =>
-    type === 'date' &&
-    css`
-      width: 200px;
-    `}
-`;
-
-const StyledTextArea = styled(Textarea)`
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: ${({ theme }) => theme.regular};
-  font-family: Poppins, sans-serif;
-  background-color: ${({ theme }) => theme.color5};
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  padding: 5px 15px;
-  margin: 10px 0;
-  resize: none;
-`;
-
-const StyledSelect = styled(Select)`
-  width: 120px;
-  margin: 10px 0;
-
-  > select {
-    font-size: ${({ theme }) => theme.fontSize.xs};
-    font-weight: ${({ theme }) => theme.regular};
-    font-family: Poppins, sans-serif;
-    background-color: ${({ theme }) => theme.color5};
-    border-radius: 50px;
-    width: 100%;
-    padding: 5px 15px;
+  > div {
+    width: 50%;
   }
 `;
 
@@ -149,20 +114,35 @@ const StyledLabel = styled.label`
   font-size: ${({ theme }) => theme.fontSize.xs};
   font-weight: ${({ theme }) => theme.light};
   font-family: Open Sans, sans-serif;
-  color: ${({ theme }) => theme.color3};
+  color: ${({ theme }) => theme.darkgrey};
 `;
 
 const StyledButton = styled(Button)`
   align-self: center;
 `;
 
+const Star = styled.img`
+  height: 15px;
+  display: inline-block;
+  margin-left: 5px;
+  transform: translateY(2px);
+`;
+
 const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
   <>
-    <Overlay isVisible={isVisible} />
+    <Overlay isVisible={isVisible} onClick={handleClose} />
     <StyledWrapper isVisible={isVisible}>
       <Heading>Add new finished route!</Heading>
       <Formik
-        initialValues={{ name: '', grade: '', location: '', crag: '', type: '', description: '' }}
+        initialValues={{
+          name: '',
+          grade: '',
+          location: '',
+          crag: '',
+          type: '',
+          rating: '',
+          description: '',
+        }}
         onSubmit={(values, { resetForm }) => {
           addItem(values);
           handleClose();
@@ -175,7 +155,8 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
               <InnerWrapper>
                 <StyledLabel>Name and grade of the route:</StyledLabel>
                 <HorizontalWrapper>
-                  <StyledInput
+                  <Input
+                    small
                     name="name"
                     placeholder="Name"
                     required
@@ -183,24 +164,27 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
                     onBlur={handleBlur}
                     value={values.name || ''}
                   />
-                  <StyledSelect
-                    placeholder="Grade"
+                  <Select
                     name="grade"
                     required
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.grade || ''}
                   >
-                    <option value="" selected disabled hidden>
+                    <option value="" disabled hidden>
                       Grade
                     </option>
                     {grades.map(grade => (
-                      <option value={grade}>{grade}</option>
+                      <option value={grade} key={grade}>
+                        {grade}
+                      </option>
                     ))}
-                  </StyledSelect>
+                  </Select>
                 </HorizontalWrapper>
                 <StyledLabel>Date:</StyledLabel>
-                <StyledInput
+                <Input
+                  small
+                  width="160px"
                   type="date"
                   placeholder="Date"
                   name="date"
@@ -211,7 +195,8 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
                 />
                 <StyledLabel>Location and name of the crag:</StyledLabel>
                 <HorizontalWrapper>
-                  <StyledInput
+                  <Input
+                    small
                     placeholder="Location"
                     name="location"
                     required
@@ -219,7 +204,8 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
                     onBlur={handleBlur}
                     value={values.location || ''}
                   />
-                  <StyledInput
+                  <Input
+                    small
                     placeholder="Crag name"
                     name="crag"
                     required
@@ -228,26 +214,53 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
                     value={values.crag || ''}
                   />
                 </HorizontalWrapper>
-                <StyledLabel>Type of the climb: </StyledLabel>
-                <StyledSelect
-                  placeholder="Type"
-                  name="type"
-                  required
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.type || ''}
-                >
-                  <option value="" selected disabled hidden>
-                    Type
-                  </option>
-                  {climbTypes.map(type => (
-                    <option value={type}>{type}</option>
-                  ))}
-                </StyledSelect>
+                <HorizontalWrapper>
+                  <div>
+                    <StyledLabel>Type of the climb: </StyledLabel>
+                    <Select
+                      placeholder="Type"
+                      name="type"
+                      required
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.type || ''}
+                    >
+                      <option value="" disabled hidden>
+                        Type
+                      </option>
+                      {climbTypes.map(type => (
+                        <option value={type} key={type}>
+                          {type}
+                        </option>
+                      ))}
+                    </Select>
+                  </div>
+                  <div>
+                    <StyledLabel>Rating: </StyledLabel>
+                    <Star src={StarIcon} />
+                    <Select
+                      placeholder="Rating"
+                      name="rating"
+                      required
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.rating || ''}
+                    >
+                      <option value="" disabled hidden>
+                        1
+                      </option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </Select>
+                  </div>
+                </HorizontalWrapper>
               </InnerWrapper>
               <InnerWrapper>
                 <StyledLabel>Short description: </StyledLabel>
-                <StyledTextArea
+                <Textarea
                   placeholder="Description"
                   name="description"
                   onChange={handleChange}

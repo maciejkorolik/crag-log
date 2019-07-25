@@ -3,7 +3,7 @@ export const theme = {
   color1: '#254142',
   color2: '#D9CFD0',
   color3: '#6E7B7C',
-  color4: '#564B5C',
+  color4: '#C37859',
   color5: '#E8E8E8',
   darkgrey: '#3d3d3d',
   light: 300,
@@ -13,9 +13,9 @@ export const theme = {
   fontSize: {
     xxs: '1rem',
     xs: '1.2rem',
-    s: '1.8rem',
+    s: '1.5rem',
     m: '2rem',
-    l: '2.6rem',
-    xl: '3.8rem',
+    l: '2.4rem',
+    xl: '3.5rem',
   },
 };

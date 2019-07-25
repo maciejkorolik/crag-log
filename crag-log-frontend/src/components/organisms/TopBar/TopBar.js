@@ -1,5 +1,7 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout as logoutAction } from 'actions';
 import styled from 'styled-components';
 import routesIcon from 'assets/icons/routes.svg';
 import activeRoutesIcon from 'assets/icons/activeroutes.svg';
@@ -43,7 +45,7 @@ const StyledNavList = styled.ul`
   list-style: none;
 `;
 
-const TopBar = () => (
+const TopBar = ({ logout }) => (
   <StyledWrapper>
     <StyledLogo />
     <StyledNavList>
@@ -68,8 +70,19 @@ const TopBar = () => (
         </NavButton>
       </li>
     </StyledNavList>
-    <IconButton icon={logoutIcon} />
+    <IconButton onClick={logout} icon={logoutIcon} />
   </StyledWrapper>
 );
 
-export default TopBar;
+TopBar.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutAction()),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(TopBar);

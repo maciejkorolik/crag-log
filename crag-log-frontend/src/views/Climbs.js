@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import Fade from 'react-reveal/Fade';
 import AppTemplate from 'templates/AppTemplate';
 import ClimbCard from 'components/molecules/ClimbCard/ClimbCard';
 import NewItemPanel from 'components/organisms/NewItemPanel/NewItemPanel';
 import IconButton from 'components/atoms/IconButton/IconButton';
 import plusIcon from 'assets/icons/plus.svg';
+import { fetchItems } from 'actions';
 
 const Grid = styled.div`
   display: grid;
@@ -35,6 +37,11 @@ class Climbs extends Component {
     isNewItemPanelVisible: false,
   };
 
+  componentDidMount() {
+    const { fetchClimbs } = this.props;
+    fetchClimbs();
+  }
+
   toggleNewItemPanel = () => {
     this.setState(prevState => ({
       isNewItemPanelVisible: !prevState.isNewItemPanelVisible,
@@ -50,7 +57,9 @@ class Climbs extends Component {
         <StyledWrapper>
           <Grid>
             {climbs.map(climb => (
-              <ClimbCard id={climb.id} climb={climb} key={climb.id} />
+              <Fade key={climb._id}>
+                <ClimbCard climb={climb} key={climb._id} />
+              </Fade>
             ))}
           </Grid>
         </StyledWrapper>
@@ -63,7 +72,7 @@ class Climbs extends Component {
 Climbs.propTypes = {
   climbs: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       grade: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
@@ -72,7 +81,12 @@ Climbs.propTypes = {
       type: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
     }),
-  ).isRequired,
+  ),
+  fetchClimbs: PropTypes.func.isRequired,
+};
+
+Climbs.defaultProps = {
+  climbs: [],
 };
 
 const mapStateToProps = state => {
@@ -80,4 +94,11 @@ const mapStateToProps = state => {
   return { climbs };
 };
 
-export default connect(mapStateToProps)(Climbs);
+const mapDispatchToProps = dispatch => ({
+  fetchClimbs: () => dispatch(fetchItems()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Climbs);

@@ -12,6 +12,7 @@ const climb = {
       location: req.body.location,
       crag: req.body.crag,
       type: req.body.type,
+      rating: req.body.rating,
       description: req.body.description,
       userID: req.body.userID
     };
@@ -51,6 +52,7 @@ const climb = {
       location: req.body.location,
       crag: req.body.crag,
       type: req.body.type,
+      rating: req.body.rating,
       description: req.body.description
     };
     Climb.findByIdAndUpdate(req.params.id, updatedClimbContent)

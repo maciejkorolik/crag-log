@@ -6,6 +6,7 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import Grade from 'components/atoms/Grade/Grade';
+import Rating from 'components/atoms/Rating/Rating';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -25,6 +26,7 @@ const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-grow: 1;
   height: 100%;
   padding: 20px;
 
@@ -33,11 +35,12 @@ const InnerWrapper = styled.div`
     css`
       border-radius: 15px 15px 0 0;
       padding: 0 20px;
-      height: 70px;
       background-color: ${({ theme }) => theme.color3};
       flex-direction: row;
       justify-content: ${({ details }) => (details ? 'center' : 'flex-start')};
       align-items: center;
+      height: 60px;
+      max-height: 60px;
     `}
 `;
 
@@ -47,6 +50,7 @@ const StyledSpan = styled.span`
 `;
 
 const StyledButton = styled(Button)`
+  margin-top: auto;
   align-self: flex-end;
 `;
 
@@ -59,12 +63,12 @@ class ClimbCard extends Component {
 
   render() {
     const { climb } = this.props;
-    const { id, name, grade, date, location, crag, type } = climb;
+    const { _id, name, grade, date, location, crag, type, rating } = climb;
 
     const { redirect } = this.state;
 
     if (redirect) {
-      return <Redirect to={`/climbs/details/${id}`} />;
+      return <Redirect to={`/climbs/details/${_id}`} />;
     }
 
     return (
@@ -91,6 +95,7 @@ class ClimbCard extends Component {
               <StyledSpan>Type:</StyledSpan>
               {type}
             </Paragraph>
+            <Rating value={rating} />
           </div>
           <StyledButton secondary onClick={this.handleCardClick}>
             See more
@@ -110,6 +115,7 @@ ClimbCard.propTypes = {
       location: PropTypes.string.isRequired,
       crag: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
     }),
   ).isRequired,
 };

@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { routes } from 'routes';
 import backgroundPattern from 'assets/topography.svg';
-import TopBar from 'components/organisms/TopBar.js/TopBar';
+import TopBar from 'components/organisms/TopBar/TopBar';
 
 const StyledWrapper = styled.div`
   margin: 0;
@@ -15,15 +18,30 @@ const StyledWrapper = styled.div`
   position: relative;
 `;
 
-const AppTemplate = ({ children }) => (
-  <StyledWrapper>
-    <TopBar />
-    {children}
-  </StyledWrapper>
-);
+const AppTemplate = ({ children, userID }) => {
+  if (!userID) {
+    return <Redirect to={routes.login} />;
+  }
+  return (
+    <StyledWrapper>
+      <TopBar />
+      {children}
+    </StyledWrapper>
+  );
+};
 
 AppTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
+  userID: PropTypes.string,
 };
 
-export default AppTemplate;
+AppTemplate.defaultProps = {
+  userID: '',
+};
+
+const mapStateToProps = state => {
+  const { userID } = state;
+  return { userID };
+};
+
+export default connect(mapStateToProps)(AppTemplate);

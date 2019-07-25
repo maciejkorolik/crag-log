@@ -1,103 +1,56 @@
+import {
+  ADD_ITEM_SUCCESS,
+  REMOVE_ITEM_SUCCESS,
+  AUTH_SUCCESS,
+  REGISTER_SUCCESS,
+  LOGOUT,
+  FETCH_REQUEST,
+  FETCH_SUCCESS,
+} from 'actions';
+
 const initialState = {
-  climbs: [
-    {
-      id: 1,
-      name: 'nazwa drogi',
-      grade: '5a+',
-      date: '25.07.19',
-      location: 'Świebodzice',
-      crag: 'Pełcznica',
-      type: 'lead',
-      style: 'OS',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    },
-    {
-      id: 2,
-      name: 'nazwa drogi',
-      grade: '4b',
-      date: '25.07.19',
-      location: 'Świebodzice',
-      crag: 'Pełcznica',
-      type: 'lead',
-      style: 'OS',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    },
-    {
-      id: 3,
-      name: 'nazwa drogi',
-      grade: '6b+',
-      date: '25.07.19',
-      location: 'Świebodzice',
-      crag: 'Pełcznica',
-      type: 'lead',
-      style: 'OS',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    },
-    {
-      id: 4,
-      name: 'nazwa drogi',
-      grade: '8c',
-      date: '25.07.19',
-      location: 'Świebodzice',
-      crag: 'Pełcznica',
-      type: 'lead',
-      style: 'OS',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    },
-    {
-      id: 5,
-      name: 'nazwa drogi',
-      grade: '4c',
-      date: '25.07.19',
-      location: 'Świebodzice',
-      crag: 'Pełcznica',
-      type: 'lead',
-      style: 'OS',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    },
-    {
-      id: 6,
-      name: 'nazwa drogi',
-      grade: '7a',
-      date: '25.07.19',
-      location: 'Świebodzice',
-      crag: 'Pełcznica',
-      type: 'lead',
-      style: 'OS',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    },
-    {
-      id: 7,
-      name: 'nazwa drogi',
-      grade: '6b+',
-      date: '25.07.19',
-      location: 'Świebodzice',
-      crag: 'Pełcznica',
-      type: 'lead',
-      style: 'OS',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    },
-  ],
+  userID: '5d3465b847573901abad2812',
+  isLoading: false,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case FETCH_REQUEST:
       return {
         ...state,
-        climbs: [...state.climbs, action.payload.item],
+        isLoading: true,
       };
-    case 'REMOVE_ITEM':
+    case FETCH_SUCCESS:
       return {
         ...state,
-        climbs: [...state.climbs.filter(item => item.id !== action.payload.id)],
+        isLoading: false,
+        climbs: [...action.payload.data],
+      };
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        userID: action.payload.data._id,
+      };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        userID: action.payload.data._id,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        userID: '',
+        climbs: [],
+      };
+    case ADD_ITEM_SUCCESS:
+      return {
+        ...state,
+        climbs: [...state.climbs, action.payload.data],
+      };
+    case REMOVE_ITEM_SUCCESS:
+      return {
+        ...state,
+        climbs: [...state.climbs.filter(item => item._id !== action.payload.id)],
       };
     default:
       return state;

@@ -11,7 +11,7 @@ const ClimbSchema = new Schema({
     required: true
   },
   date: {
-    type: Date,
+    type: String,
     required: true
   },
   location: {
@@ -26,9 +26,13 @@ const ClimbSchema = new Schema({
     type: String,
     required: true
   },
+  rating: {
+    type: Number,
+    required: true
+  },
   description: {
     type: String,
-    defualt: ""
+    default: ""
   },
   userID: {
     type: String,

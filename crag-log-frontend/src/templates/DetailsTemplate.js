@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import Fade from 'react-reveal/Fade';
 import AppTemplate from 'templates/AppTemplate';
-import DetailsPanel from 'components/organisms/DetailsPanel/DetailsPanel';
+import DetailsPanel from 'components/molecules/DetailsPanel/DetailsPanel';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -13,25 +13,29 @@ const StyledWrapper = styled.div`
   padding: 30px;
 `;
 
-const climb = {
-  id: 3,
-  name: 'nazwa drogi',
-  grade: '6b+',
-  date: '25.07.19',
-  location: 'Świebodzice',
-  crag: 'Pełcznica',
-  type: 'lead',
-  style: 'OS',
-  description:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-};
-
-const DetailsTemplate = () => (
+const DetailsTemplate = ({ climb }) => (
   <AppTemplate>
-    <StyledWrapper>
-      <DetailsPanel climb={climb} />
-    </StyledWrapper>
+    <Fade top>
+      <StyledWrapper>
+        <DetailsPanel climb={climb} />
+      </StyledWrapper>
+    </Fade>
   </AppTemplate>
 );
+
+DetailsTemplate.propTypes = {
+  climb: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      grade: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      crag: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default DetailsTemplate;
