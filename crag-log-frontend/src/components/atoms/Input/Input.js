@@ -5,6 +5,7 @@ const Input = styled.input`
   font-family: 'Poppins', sans-serif;
   font-size: ${({ theme }) => theme.fontSize.s};
   font-weight: ${({ theme }) => theme.regular};
+  color: ${({ theme, value }) => (value ? 'black' : theme.color3)};
   background-color: ${({ theme }) => theme.color5};
   border: none;
   border-radius: 50px;

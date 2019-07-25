@@ -56,11 +56,14 @@ class Climbs extends Component {
         <NewItemPanel handleClose={this.toggleNewItemPanel} isVisible={isNewItemPanelVisible} />
         <StyledWrapper>
           <Grid>
-            {climbs.map(climb => (
-              <Fade key={climb._id}>
-                <ClimbCard climb={climb} key={climb._id} />
-              </Fade>
-            ))}
+            {climbs
+              .slice(0)
+              .reverse()
+              .map(climb => (
+                <Fade key={climb._id}>
+                  <ClimbCard climb={climb} key={climb._id} />
+                </Fade>
+              ))}
           </Grid>
         </StyledWrapper>
         <NewItemButton icon={plusIcon} onClick={this.toggleNewItemPanel} />

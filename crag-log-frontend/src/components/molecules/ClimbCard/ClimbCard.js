@@ -11,6 +11,7 @@ import Rating from 'components/atoms/Rating/Rating';
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 280px;
+  max-width: 330px;
   border-radius: 15px;
   position: relative;
   display: flex;
@@ -54,6 +55,10 @@ const StyledButton = styled(Button)`
   align-self: flex-end;
 `;
 
+const StyledHeading = styled(Heading)`
+  font-size: 20px;
+`;
+
 class ClimbCard extends Component {
   state = {
     redirect: false,
@@ -71,10 +76,19 @@ class ClimbCard extends Component {
       return <Redirect to={`/climbs/details/${_id}`} />;
     }
 
+    let shorterName = name;
+    if (name.split('').length > 15) {
+      shorterName = name
+        .split('')
+        .slice(0, 15)
+        .join('')
+        .concat('...');
+    }
+
     return (
       <StyledWrapper>
         <InnerWrapper top>
-          <Heading light>{name}</Heading>
+          <StyledHeading light>{shorterName}</StyledHeading>
           <Grade grade={grade}>{grade}</Grade>
         </InnerWrapper>
         <InnerWrapper>

@@ -15,7 +15,7 @@ const StyledWrapper = styled.div`
 
 const DetailsTemplate = ({ climb }) => (
   <AppTemplate>
-    <Fade top>
+    <Fade>
       <StyledWrapper>
         <DetailsPanel climb={climb} />
       </StyledWrapper>
