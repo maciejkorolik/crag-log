@@ -7,6 +7,7 @@ import AppTemplate from 'templates/AppTemplate';
 import ClimbCard from 'components/molecules/ClimbCard/ClimbCard';
 import NewItemPanel from 'components/organisms/NewItemPanel/NewItemPanel';
 import IconButton from 'components/atoms/IconButton/IconButton';
+import LoadingIndicator from 'components/atoms/LoadingIndicator/LoadingIndicator';
 import plusIcon from 'assets/icons/plus.svg';
 import { fetchItems } from 'actions';
 
@@ -28,7 +29,7 @@ const NewItemButton = styled(IconButton)`
   right: 50px;
   width: 60px;
   height: 60px;
-  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
   z-index: 999;
 `;
 
@@ -49,13 +50,15 @@ class Climbs extends Component {
   };
 
   render() {
-    const { climbs } = this.props;
+    const { climbs, isLoading } = this.props;
     const { isNewItemPanelVisible } = this.state;
     return (
       <AppTemplate>
         <NewItemPanel handleClose={this.toggleNewItemPanel} isVisible={isNewItemPanelVisible} />
         <StyledWrapper>
-          <Grid>
+        {isLoading && <LoadingIndicator>Loading...</LoadingIndicator>}
+          { climbs && (
+            <Grid>
             {climbs
               .slice(0)
               .reverse()
@@ -65,6 +68,7 @@ class Climbs extends Component {
                 </Fade>
               ))}
           </Grid>
+           )}
         </StyledWrapper>
         <NewItemButton icon={plusIcon} onClick={this.toggleNewItemPanel} />
       </AppTemplate>
@@ -93,8 +97,8 @@ Climbs.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  const { climbs } = state;
-  return { climbs };
+  const { climbs, isLoading } = state;
+  return { climbs, isLoading };
 };
 
 const mapDispatchToProps = dispatch => ({

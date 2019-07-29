@@ -56,7 +56,7 @@ const TopBar = ({ logout }) => (
           activeIcon={activeRoutesIcon}
           activeClassName="active"
         >
-          Routes
+          Climbs
         </NavButton>
       </li>
       <li>
