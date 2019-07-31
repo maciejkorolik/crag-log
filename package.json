@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-install": "yarn install --prefix client",
+    "client-install": "yarn install --cwd client",
     "start": "node server.js",
     "server": "nodemon --exec babel-node server.js",
-    "client": "yarn start --prefix client",
+    "client": "yarn start --cwd client",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "heroku-postbuild": "YARN_PRODUCTION=false yarn --cwd client install && yarn --cwd client run build"
   },
