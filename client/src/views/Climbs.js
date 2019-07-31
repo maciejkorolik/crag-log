@@ -56,17 +56,17 @@ class Climbs extends Component {
       <AppTemplate>
         <NewItemPanel handleClose={this.toggleNewItemPanel} isVisible={isNewItemPanelVisible} />
         <StyledWrapper>
-        {isLoading && <LoadingIndicator>Loading...</LoadingIndicator>}
-        <Fade>
+          {isLoading && <LoadingIndicator>Loading...</LoadingIndicator>}
+          <Fade>
             <Grid>
-            {climbs
-              .slice(0)
-              .reverse()
-              .map(climb => (
+              {climbs
+                .slice(0)
+                .reverse()
+                .map(climb => (
                   <ClimbCard climb={climb} key={climb._id} />
-              ))}
-          </Grid>
-           </Fade>
+                ))}
+            </Grid>
+          </Fade>
         </StyledWrapper>
         <NewItemButton icon={plusIcon} onClick={this.toggleNewItemPanel} />
       </AppTemplate>

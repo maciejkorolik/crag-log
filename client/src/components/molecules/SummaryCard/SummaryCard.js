@@ -64,7 +64,9 @@ const SummaryCard = ({ data }) => {
         <ClimbNumber>{climbsCount}</ClimbNumber>
       </InnerWrapper>
       <Line />
-      <Heading slim>Current month: <StyledSpan>{monthCount}</StyledSpan></Heading>
+      <Heading slim>
+        Current month: <StyledSpan>{monthCount}</StyledSpan>
+      </Heading>
     </StyledWrapper>
   );
 };

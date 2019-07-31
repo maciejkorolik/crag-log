@@ -27,13 +27,14 @@ const AppTemplate = ({ children, userID }) => {
 
   return (
     <StyledWrapper>
-    {(width > 760) ? (
-      <>
-       <TopBar />
-      {children}
-      </>
-    ) : <SmallScreenWarning />
-      }
+      {width > 760 ? (
+        <>
+          <TopBar />
+          {children}
+        </>
+      ) : (
+        <SmallScreenWarning />
+      )}
     </StyledWrapper>
   );
 };

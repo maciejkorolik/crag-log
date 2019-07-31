@@ -28,14 +28,14 @@ const StatsPanel = styled.div`
   grid-gap: 15px;
   grid-auto-columns: 1fr;
   grid-template-areas:
-  "a a a b b b b b c c c c"
-  "d d d d d d d e e e e e";
+    'a a a b b b b b c c c c'
+    'd d d d d d d e e e e e';
   @media (max-width: 1200px) {
     max-width: 1000px;
-     grid-template-areas:
-  "a a a a c c c c"
-  "b b b b b e e e"
-  "d d d d d d d d";
+    grid-template-areas:
+      'a a a a c c c c'
+      'b b b b b e e e'
+      'd d d d d d d d';
   }
 `;
 
@@ -49,20 +49,20 @@ class Stats extends Component {
     const { climbs, isLoading } = this.props;
     return (
       <AppTemplate>
-          <StyledWrapper>
-            {isLoading && <LoadingIndicator>Loading...</LoadingIndicator>}
-              <StatsPanel>
-                <SummaryCard data={climbs} />
-                <PieChart data={climbs} />
-                <FavCard data={climbs} />
-                <ColumnChart data={climbs} />
-                <CragsCard data={climbs} />
-              </StatsPanel>
-          </StyledWrapper>
+        <StyledWrapper>
+          {isLoading && <LoadingIndicator>Loading...</LoadingIndicator>}
+          <StatsPanel>
+            <SummaryCard data={climbs} />
+            <PieChart data={climbs} />
+            <FavCard data={climbs} />
+            <ColumnChart data={climbs} />
+            <CragsCard data={climbs} />
+          </StatsPanel>
+        </StyledWrapper>
       </AppTemplate>
     );
   }
-};
+}
 
 Stats.propTypes = {
   climbs: PropTypes.arrayOf(
@@ -83,7 +83,6 @@ Stats.propTypes = {
 Stats.defaultProps = {
   climbs: [],
 };
-
 
 const mapStateToProps = state => {
   const { climbs, isLoading } = state;
