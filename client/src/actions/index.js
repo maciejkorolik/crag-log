@@ -26,7 +26,7 @@ export const authenticate = (username, password) => dispatch => {
   dispatch({ type: AUTH_REQUEST });
 
   return axios
-    .post('http://localhost:9000/api/user/login', {
+    .post('/api/user/login', {
       username,
       password,
     })
@@ -44,7 +44,7 @@ export const register = (username, password) => dispatch => {
   dispatch({ type: REGISTER_REQUEST });
 
   return axios
-    .post('http://localhost:9000/api/user/register', {
+    .post('/api/user/register', {
       username,
       password,
     })
@@ -65,7 +65,7 @@ export const fetchItems = () => (dispatch, getState) => {
   dispatch({ type: FETCH_REQUEST });
 
   return axios
-    .get('http://localhost:9000/api/climbs', {
+    .get('/api/climbs', {
       params: {
         userID: getState().userID,
       },
@@ -88,7 +88,7 @@ export const removeItem = id => dispatch => {
   dispatch({ type: REMOVE_ITEM_REQUEST });
 
   axios
-    .delete(`http://localhost:9000/api/climb/${id}`)
+    .delete(`/api/climb/${id}`)
     .then(() => {
       dispatch({
         type: REMOVE_ITEM_SUCCESS,
@@ -107,7 +107,7 @@ export const addItem = itemContent => (dispatch, getState) => {
   dispatch({ type: ADD_ITEM_REQUEST });
 
   return axios
-    .post('http://localhost:9000/api/climb', {
+    .post('/api/climb', {
       userID: getState().userID,
       ...itemContent,
     })

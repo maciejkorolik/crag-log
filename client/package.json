@@ -69,5 +69,6 @@
       "eslint --fix",
       "git add"
     ]
-  }
+  },
+  "proxy": "http://localhost:9000"
 }

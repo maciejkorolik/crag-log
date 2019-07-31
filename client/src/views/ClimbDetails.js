@@ -15,7 +15,7 @@ class ClimbDetails extends Component {
     } else {
       const { id } = this.props.match.params;
       axios
-        .get(`http://localhost:9000/api/climb/${id}`)
+        .get(`/api/climb/${id}`)
         .then(({ data }) => {
           this.setState({ activeItem: data });
         })
