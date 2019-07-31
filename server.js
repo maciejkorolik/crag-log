@@ -7,8 +7,8 @@ const passport = require("passport");
 const morgan = require("morgan");
 const cors = require("cors");
 const LocalStrategy = require("passport-local").Strategy;
-const routes = require("./routes");
-const User = require("./models/User");
+const routes = require("./src/routes");
+const User = require("./src/models/User");
 
 const PORT = process.env.PORT || 9000;
 
