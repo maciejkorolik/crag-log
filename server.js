@@ -34,16 +34,6 @@ app.use(passport.session());
 
 mongoose.connect(process.env.NODE_DATABASE, { useNewUrlParser: true });
 
-// Serve static assets if in production
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static("client/build"));
-
-  // app.get("*", (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  // });
-}
-
 const conn = mongoose.connection;
 conn.on("error", console.error.bind(console, "connection error:"));
 conn.once("open", () => {
@@ -51,3 +41,13 @@ conn.once("open", () => {
   app.listen(PORT, () => console.log(`App is listening on port ${PORT}!`));
   app.use("/api", routes);
 });
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
