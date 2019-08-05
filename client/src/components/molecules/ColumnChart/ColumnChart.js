@@ -1,24 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ResponsiveBar } from '@nivo/bar';
+import { Bar } from '@nivo/bar';
+import AutoSizer from 'react-virtualized-auto-sizer';
 import Heading from 'components/atoms/Heading/Heading';
 import chartTheme from 'theme/chartTheme';
 
 const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
-
   padding: 20px;
   border-radius: 15px;
   background-color: white;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
   grid-area: d;
-`;
-const ChartWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  max-height: 300px;
 `;
 
 const ColumnChart = ({ data }) => {
@@ -55,6 +50,7 @@ const ColumnChart = ({ data }) => {
     { name: '9c+', value: null },
   ];
   emptyData.forEach(object => {
+    // eslint-disable-next-line no-param-reassign
     object.value = data.filter(climb => climb.grade === object.name).length;
   });
   const filteredData = [...emptyData].filter(object => object.value > 0);
@@ -62,20 +58,25 @@ const ColumnChart = ({ data }) => {
   return (
     <StyledWrapper>
       <Heading>Climbs divided by grades:</Heading>
-      <ChartWrapper>
-        <ResponsiveBar
-          data={filteredData}
-          indexBy="name"
-          colors="#C37859"
-          enableGridY={false}
-          margin={{ top: 15, right: 15, bottom: 50, left: 15 }}
-          padding={0.3}
-          theme={chartTheme}
-          axisLeft={null}
-          isInteractive={false}
-          animate={false}
-        />
-      </ChartWrapper>
+      <AutoSizer>
+        {({ height, width }) => (
+          <Bar
+            height={height}
+            width={width}
+            data={filteredData}
+            indexBy="name"
+            colors="#C37859"
+            enableGridY={false}
+            margin={{ top: 15, right: 15, bottom: 70, left: 15 }}
+            padding={0.3}
+            // @ts-ignore
+            theme={chartTheme}
+            axisLeft={null}
+            isInteractive={false}
+            animate={false}
+          />
+        )}
+      </AutoSizer>
     </StyledWrapper>
   );
 };

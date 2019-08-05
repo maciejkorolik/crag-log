@@ -111,8 +111,8 @@ const HorizontalWrapper = styled.div`
 `;
 
 const StyledLabel = styled.label`
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: ${({ theme }) => theme.light};
+  font-size: 1.3rem;
+  font-weight: ${({ theme }) => theme.regular};
   font-family: Open Sans, sans-serif;
   color: ${({ theme }) => theme.darkgrey};
 `;

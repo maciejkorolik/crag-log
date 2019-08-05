@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ResponsiveBar } from '@nivo/bar';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import { Bar } from '@nivo/bar';
 import chartTheme from 'theme/chartTheme';
 import Heading from 'components/atoms/Heading/Heading';
 
@@ -13,12 +14,6 @@ const StyledWrapper = styled.div`
   background-color: white;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
   grid-area: e;
-`;
-
-const ChartWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  max-height: 250px;
 `;
 
 const CragsCard = ({ data }) => {
@@ -43,22 +38,27 @@ const CragsCard = ({ data }) => {
   return (
     <StyledWrapper>
       <Heading>Most popular crags:</Heading>
-      <ChartWrapper>
-        <ResponsiveBar
-          data={sortedData}
-          indexBy="name"
-          colors="#C37859"
-          layout="horizontal"
-          enableGridY={false}
-          margin={{ top: 15, right: 15, bottom: 15, left: 120 }}
-          padding={0.3}
-          labelSkipWidth={15}
-          theme={chartTheme}
-          axisBottom={null}
-          isInteractive={false}
-          animate={false}
-        />
-      </ChartWrapper>
+      <AutoSizer>
+        {({ height, width }) => (
+          <Bar
+            height={height}
+            width={width}
+            data={sortedData}
+            indexBy="name"
+            colors="#C37859"
+            layout="horizontal"
+            enableGridY={false}
+            margin={{ top: 15, right: 15, bottom: 15, left: 120 }}
+            padding={0.3}
+            labelSkipWidth={15}
+            // @ts-ignore
+            theme={chartTheme}
+            axisBottom={null}
+            isInteractive={false}
+            animate={false}
+          />
+        )}
+      </AutoSizer>
     </StyledWrapper>
   );
 };

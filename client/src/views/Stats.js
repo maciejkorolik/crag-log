@@ -27,6 +27,7 @@ const StatsPanel = styled.div`
   display: grid;
   grid-gap: 15px;
   grid-auto-columns: 1fr;
+  grid-auto-rows: minmax(280px, 350px);
   grid-template-areas:
     'a a a b b b b b c c c c'
     'd d d d d d d e e e e e';
