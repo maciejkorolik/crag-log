@@ -86,6 +86,7 @@ First version of the app is quite basic and has a lot of room for future improve
 * Routing doesn't work properly on Heroku deployed build
 * Forms validation (login, register and new item) - in Formik and Yup
 * Proper authentication - currently API routes are not protected, after login, user gets the ID, it is stored and then used for making the requests, so it is not very safe...
+* Inputs type "select" don't appear properly on Firefox and Safari
 
 ### **Ideas for new features**
 * Possibility to upload photos of the route
