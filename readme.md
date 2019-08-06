@@ -30,7 +30,7 @@ The app is generally divided into two main parts:
 * **Climbs section** - in this view, the user can see all climbing routes that he/she finished, presented as cards on a grid. Each card has some basic info about the route, clicking "see more" button shows a more detailed view of selected climb. Clicking "plus" button on the bottom of the screen shows a panel for adding a new climb.
 * **Stats section** - in this view the data about all added climbs is presented in form of charts and lists. For displaying charts I used *nivo* library. In current version the presented statistics are quite basic, but there is a room for more complex analysis and presentation of the data, which can be implemented in next versions of the app.
 
-The app is responsive to some extent - unfortunatelly it doesnt support smartphones still. For widths 768px and more it is fully responsive, on smaller devices it shows an info informing that it requires bigger screen.
+The app is responsive to some extent - unfortunatelly it doesn't support smartphones yet. For widths 768px and more it is fully responsive, while on smaller devices it shows an info saying that the app requires bigger screen.
 
 ### **Backend**
 I am not a backend developer and this project was made mostly to learn React, therefore backend side of the app is very basic and can't be considered as a ready product. Big part of the code was taken from a backend provided to the React course by [helloroman](https://github.com/helloroman) (thank you!) and then modified by me. It is built on *Node.js* and *Express* with a database on *MongoDB Atlas*.
