@@ -43,8 +43,8 @@ Following technologies, libraries and packages were used to create this app:
 * **Frontend**:
   * React
   * react-router
-  * styled-components
-  * redux
+  * styled.components
+  * redux.
   * redux-thunk
   * nivo
   * moment.js
@@ -82,7 +82,7 @@ First version of the app is quite basic and has a lot of room for future improve
 
 * RWD - need to create proper mobile version
 * Error handling for API requests- currently there is none :/
-* User should be remebered after refresh or tab close - currently it requires to log in every time after the refresh
+* ~~User is logged out after every refresh~~ *DONE 19.08.19 - basic fix with localstorage*
 * Routing doesn't work properly on Heroku deployed build
 * Forms validation (login, register and new item) - in Formik and Yup
 * Proper authentication - currently API routes are not protected, after login, user gets the ID, it is stored and then used for making the requests, so it is not very safe...
