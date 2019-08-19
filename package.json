@@ -6,7 +6,7 @@
   "scripts": {
     "client-install": "cd client; yarn install",
     "start": "node server.js",
-    "server": "nodemon --exec babel-node server.js",
+    "server": "nodemon --exec babel-node server.js --ignore client",
     "client": "yarn start --cwd client",
     "dev": "concurrently -r -k \"yarn run server\" \"cd client; yarn start\"",
     "heroku-postbuild": "YARN_PRODUCTION=false yarn --cwd client install && yarn --cwd client run build"

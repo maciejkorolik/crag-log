@@ -9,7 +9,7 @@ import {
 } from 'actions';
 
 const initialState = {
-  userID: '',
+  userID: localStorage.getItem('craglog-user'),
   isLoading: false,
 };
 
@@ -27,19 +27,17 @@ const rootReducer = (state = initialState, action) => {
         climbs: [...action.payload.data],
       };
     case AUTH_SUCCESS:
-      return {
-        ...state,
-        userID: action.payload.data._id,
-      };
     case REGISTER_SUCCESS:
+      localStorage.setItem('craglog-user', action.payload.data._id);
       return {
         ...state,
-        userID: action.payload.data._id,
+        userID: localStorage.getItem('craglog-user'),
       };
     case LOGOUT:
+      localStorage.removeItem('craglog-user');
       return {
         ...state,
-        userID: '',
+        userID: null,
         climbs: [],
       };
     case ADD_ITEM_SUCCESS:
