@@ -14,6 +14,10 @@ const StyledWrapper = styled.div`
   background-color: white;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
   grid-area: e;
+
+  @media (max-width: 560px) {
+    min-height: 280px;
+  }
 `;
 
 const CragsCard = ({ data }) => {
@@ -37,7 +41,7 @@ const CragsCard = ({ data }) => {
 
   return (
     <StyledWrapper>
-      <Heading>Most popular crags:</Heading>
+      <Heading>Popular crags:</Heading>
       <AutoSizer>
         {({ height, width }) => (
           <Bar

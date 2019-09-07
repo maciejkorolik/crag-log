@@ -1,7 +1,7 @@
 export default {
   background: 'transparent',
   fontFamily: 'Poppins',
-  fontSize: 18,
+  fontSize: 15,
   textColor: '#333333',
   axis: {
     domain: {

@@ -14,6 +14,10 @@ const StyledWrapper = styled.div`
   background-color: white;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
   grid-area: d;
+
+  @media (max-width: 560px) {
+    min-height: 280px;
+  }
 `;
 
 const ColumnChart = ({ data }) => {
@@ -67,7 +71,7 @@ const ColumnChart = ({ data }) => {
             indexBy="name"
             colors="#C37859"
             enableGridY={false}
-            margin={{ top: 15, right: 15, bottom: 70, left: 15 }}
+            margin={{ top: 15, right: 0, bottom: 70, left: 0 }}
             padding={0.3}
             // @ts-ignore
             theme={chartTheme}

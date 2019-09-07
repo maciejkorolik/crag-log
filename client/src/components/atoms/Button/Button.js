@@ -16,6 +16,11 @@ const Button = styled.button`
   font-weight: ${({ theme }) => theme.regular};
   font-size: ${({ theme }) => theme.fontSize.m};
   cursor: pointer;
+  @media (max-width: 760px) {
+    height: 35px;
+    min-width: 120px;
+    font-size: ${({ theme }) => theme.fontSize.s};
+  }
 
   &:focus {
     outline: none;

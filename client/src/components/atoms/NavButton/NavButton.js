@@ -21,6 +21,10 @@ const StyledButton = styled(NavLink)`
   &.active {
     background-color: ${({ theme }) => theme.color2};
   }
+  @media (max-width: 760px) {
+    width: 100px;
+    height: 32px;
+  }
 `;
 
 const StyledIcon = styled.div`
@@ -36,6 +40,11 @@ const StyledIcon = styled.div`
   ${StyledButton}.active & {
     background-image: url(${({ activeIcon }) => activeIcon});
   }
+  @media (max-width: 760px) {
+    width: 20px;
+    height: 19px;
+    margin-right: 4px;
+  }
 `;
 
 const StyledText = styled.div`
@@ -44,9 +53,11 @@ const StyledText = styled.div`
   line-height: 1;
   font-size: 20px;
   font-weight: ${({ theme }) => theme.semibold};
-
   ${StyledButton}.active & {
     color: ${({ theme }) => theme.color1};
+  }
+  @media (max-width: 760px) {
+    font-size: 17px;
   }
 `;
 
