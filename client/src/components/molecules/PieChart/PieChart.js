@@ -9,11 +9,16 @@ import chartTheme from 'theme/chartTheme';
 const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
+  min-height: 280px;
   padding: 20px;
   border-radius: 15px;
   background-color: white;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
   grid-area: b;
+
+  @media (max-width: 560px) {
+    min-height: 280px;
+  }
 `;
 
 const PieChart = ({ data }) => {
@@ -38,10 +43,22 @@ const PieChart = ({ data }) => {
             height={height}
             width={width}
             data={filteredData}
-            // @ts-ignore
             theme={chartTheme}
             colors={['#C37859', '#C69683', '#C1AAA1', '#E5D9D5', '#B5C9C5']}
-            margin={{ top: 50, right: 80, bottom: 50, left: 80 }}
+            enableRadialLabels={false}
+            margin={{ top: 10, right: 120, bottom: 30, left: 10 }}
+            legends={[
+              {
+                anchor: 'right',
+                direction: 'column',
+                translateX: 110,
+                itemWidth: 100,
+                itemHeight: 18,
+                itemTextColor: '#999',
+                symbolSize: 15,
+                symbolShape: 'circle',
+              },
+            ]}
             fit={false}
             innerRadius={0.5}
             padAngle={0.7}

@@ -8,6 +8,7 @@ import activeRoutesIcon from 'assets/icons/activeroutes.svg';
 import statsIcon from 'assets/icons/stats.svg';
 import activeStatsIcon from 'assets/icons/activestats.svg';
 import logoIcon from 'assets/icons/logo.svg';
+import carabinerIcon from 'assets/icons/carabiner.svg';
 import logoutIcon from 'assets/icons/logout.svg';
 import NavButton from 'components/atoms/NavButton/NavButton';
 import IconButton from 'components/atoms/IconButton/IconButton';
@@ -25,6 +26,9 @@ const StyledWrapper = styled.div`
   background-color: ${({ theme }) => theme.color1};
   box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
   z-index: 1000;
+  @media (max-width: 760px) {
+    padding: 0 10px;
+  }
 `;
 
 const StyledLogo = styled.div`
@@ -36,6 +40,11 @@ const StyledLogo = styled.div`
   background-position: 50% 50%;
   background-size: 100%;
   border: none;
+  @media (max-width: 760px) {
+    background-image: url(${carabinerIcon});
+    width: 45px;
+    height: 45px;
+  }
 `;
 
 const StyledNavList = styled.ul`
@@ -45,6 +54,11 @@ const StyledNavList = styled.ul`
   list-style: none;
   width: 50%;
   justify-content: flex-end;
+  @media (max-width: 760px) {
+    width: auto;
+    justify-content: center;
+    flex-grow: 1;
+  }
 `;
 
 const TopBar = ({ logout }) => (

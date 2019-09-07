@@ -19,6 +19,10 @@ const IconButton = styled.button`
   &:focus {
     outline: none;
   }
+  @media (max-width: 760px) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export default IconButton;

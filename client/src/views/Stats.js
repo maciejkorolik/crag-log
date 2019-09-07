@@ -18,6 +18,9 @@ const StyledWrapper = styled.div`
   padding: 30px;
   display: flex;
   justify-content: center;
+  @media (max-width: 560px) {
+    padding: 10px;
+  }
 `;
 
 const StatsPanel = styled.div`
@@ -27,7 +30,7 @@ const StatsPanel = styled.div`
   display: grid;
   grid-gap: 15px;
   grid-auto-columns: 1fr;
-  grid-auto-rows: minmax(280px, 350px);
+  grid-auto-rows: minmax(280px, 380px);
   grid-template-areas:
     'a a a b b b b b c c c c'
     'd d d d d d d e e e e e';
@@ -37,6 +40,21 @@ const StatsPanel = styled.div`
       'a a a a c c c c'
       'b b b b b e e e'
       'd d d d d d d d';
+  }
+  @media (max-width: 760px) {
+    grid-template-areas:
+      'a e'
+      'c c'
+      'b b'
+      'd d';
+  }
+  @media (max-width: 560px) {
+    grid-template-areas:
+      'a'
+      'e'
+      'c'
+      'b'
+      'd';
   }
 `;
 
@@ -51,7 +69,7 @@ class Stats extends Component {
     return (
       <AppTemplate>
         <StyledWrapper>
-          {isLoading && <LoadingIndicator>Loading...</LoadingIndicator>}
+          {isLoading && <LoadingIndicator />}
           <StatsPanel>
             <SummaryCard data={climbs} />
             <PieChart data={climbs} />

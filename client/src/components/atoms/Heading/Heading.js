@@ -6,6 +6,9 @@ const Heading = styled.h1`
   font-weight: ${({ theme, slim }) => (slim ? theme.regular : theme.bold)};
   color: ${({ theme, light }) => (light ? theme.white : theme.color1)};
   margin: 0;
+  @media (max-width: 760px) {
+    font-size: ${({ theme }) => theme.fontSize.m};
+  }
 `;
 
 export default Heading;

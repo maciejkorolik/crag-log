@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import { routes } from 'routes';
 import backgroundPattern from 'assets/topography.svg';
 import TopBar from 'components/organisms/TopBar/TopBar';
-import SmallScreenWarning from 'components/atoms/SmallScreenWarning/SmallScreenWarning';
 
 const StyledWrapper = styled.div`
   margin: 0;
@@ -23,18 +22,10 @@ const AppTemplate = ({ children, userID }) => {
   if (!userID) {
     return <Redirect to={routes.login} />;
   }
-  const width = window.innerWidth;
-
   return (
     <StyledWrapper>
-      {width > 760 ? (
-        <>
-          <TopBar />
-          {children}
-        </>
-      ) : (
-        <SmallScreenWarning />
-      )}
+      <TopBar />
+      {children}
     </StyledWrapper>
   );
 };

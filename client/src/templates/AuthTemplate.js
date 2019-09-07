@@ -20,6 +20,10 @@ const StyledLogo = styled.img`
   width: 350px;
   height: auto;
   margin-bottom: 50px;
+  @media (max-width: 560px) {
+    width: 200px;
+    margin-bottom: 30px;
+  }
 `;
 
 const StyledAuthCard = styled.div`
@@ -32,6 +36,10 @@ const StyledAuthCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 560px) {
+    width: 290px;
+    height: 350px;
+  }
 `;
 
 const AuthTemplate = ({ children }) => (

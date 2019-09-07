@@ -36,6 +36,12 @@ const StyledSpan = styled.span`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
+const StyledRating = styled(Rating)`
+  @media (max-width: 560px) {
+    visibility: hidden;
+  }
+`;
+
 const FavCard = ({ data }) => {
   const sortedData = data.sort((a, b) => b.rating - a.rating).slice(0, 5);
   return (
@@ -47,7 +53,7 @@ const FavCard = ({ data }) => {
           <Paragraph>
             <StyledSpan>• {climb.name},</StyledSpan> {climb.grade}
           </Paragraph>
-          <Rating value={climb.rating} />
+          <StyledRating value={climb.rating} />
         </ItemWrapper>
       ))}
     </StyledWrapper>

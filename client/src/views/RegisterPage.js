@@ -25,6 +25,12 @@ const StyledInput = styled(Input)`
   &:last-of-type {
     margin-bottom: 60px;
   }
+  @media (max-width: 560px) {
+    width: 250px;
+    &:last-of-type {
+      margin-bottom: 30px;
+    }
+  }
 `;
 
 const StyledLink = styled(Link)`

@@ -16,6 +16,9 @@ const Grid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-gap: 20px;
   margin: 50px;
+  @media (max-width: 760px) {
+    margin: 20px;
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -24,13 +27,22 @@ const StyledWrapper = styled.div`
   overflow-y: auto;
 `;
 const NewItemButton = styled(IconButton)`
-  position: absolute;
+  position: fixed;
   bottom: 50px;
   right: 50px;
   width: 60px;
   height: 60px;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+  background-color: #c69683;
   z-index: 999;
+  transition: transform 0.2s ease;
+  transform: ${({ isActive }) => (isActive ? 'rotate(45deg)' : 'none')};
+  @media (max-width: 760px) {
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 class Climbs extends Component {
@@ -54,9 +66,9 @@ class Climbs extends Component {
     const { isNewItemPanelVisible } = this.state;
     return (
       <AppTemplate>
-        <NewItemPanel handleClose={this.toggleNewItemPanel} isVisible={isNewItemPanelVisible} />
         <StyledWrapper>
-          {isLoading && <LoadingIndicator>Loading...</LoadingIndicator>}
+          {isLoading && <LoadingIndicator />}
+          <NewItemPanel handleClose={this.toggleNewItemPanel} isVisible={isNewItemPanelVisible} />
           <Fade>
             <Grid>
               {climbs
@@ -68,7 +80,11 @@ class Climbs extends Component {
             </Grid>
           </Fade>
         </StyledWrapper>
-        <NewItemButton icon={plusIcon} onClick={this.toggleNewItemPanel} />
+        <NewItemButton
+          icon={plusIcon}
+          onClick={this.toggleNewItemPanel}
+          isActive={isNewItemPanelVisible}
+        />
       </AppTemplate>
     );
   }

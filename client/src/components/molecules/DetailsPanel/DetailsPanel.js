@@ -31,6 +31,9 @@ const InnerWrapper = styled.div`
   justify-content: space-between;
   height: 100%;
   padding: 20px;
+  @media (max-width: 760px) {
+    padding: 10px;
+  }
 
   ${({ top }) =>
     top &&
@@ -42,6 +45,9 @@ const InnerWrapper = styled.div`
       flex-direction: row;
       justify-content: ${({ details }) => (details ? 'center' : 'flex-start')};
       align-items: center;
+      @media (max-width: 760px) {
+        padding: 5px 100px 5px 15px;
+      }
     `}
 `;
 
@@ -51,6 +57,10 @@ const DetailsWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  @media (max-width: 760px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ButtonsWrapper = styled.div`
@@ -58,6 +68,15 @@ const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  @media (max-width: 760px) {
+    margin-top: 10px;
+    justify-content: space-between;
+    > button {
+      margin-left: 0;
+      min-width: 100px;
+      padding: 0 5px;
+    }
+  }
 `;
 
 const StyledSpan = styled.span`

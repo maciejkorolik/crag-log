@@ -46,7 +46,8 @@ const grades = [
 const climbTypes = ['Lead', 'Top rope', 'Multi-pitch', 'Boulder', 'Free solo'];
 
 const StyledWrapper = styled.div`
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   height: auto;
   position: absolute;
   top: 70px;
@@ -80,6 +81,9 @@ const Overlay = styled.div`
 const InputsWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -87,9 +91,14 @@ const InnerWrapper = styled.div`
   margin: 10px 0;
   display: flex;
   flex-direction: column;
-
+  @media (max-width: 500px) {
+    width: auto;
+  }
   &:first-child {
     margin-right: 20px;
+    @media (max-width: 500px) {
+      margin-right: 0;
+    }
   }
 `;
 
@@ -163,6 +172,7 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.name || ''}
+                    width="60%"
                   />
                   <Select
                     name="grade"
@@ -203,6 +213,7 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.location || ''}
+                    width="50%"
                   />
                   <Input
                     small
@@ -212,6 +223,7 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.crag || ''}
+                    width="50%"
                   />
                 </HorizontalWrapper>
                 <HorizontalWrapper>
@@ -266,6 +278,7 @@ const NewItemPanel = ({ isVisible, handleClose, addItem }) => (
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.description || ''}
+                  height="120px"
                 />
               </InnerWrapper>
             </InputsWrapper>
