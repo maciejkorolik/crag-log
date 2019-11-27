@@ -8,7 +8,7 @@
 ### **Demo:**
 Live demo of the app is available **[HERE](http://crag-log.herokuapp.com)**
 
-![Heroku](http://heroku-badge.herokuapp.com/?app=crag-log&style=flat)
+![Heroku](http://heroku-badge.herokuapp.com/?app=crag-log)
 
 If you just want to check how it works and not create new account, you can just log in with these credentials:
 > **login**: *testuser*
@@ -80,7 +80,7 @@ $ yarn run dev
 
 First version of the app is quite basic and has a lot of room for future improvements. Here is my to-do list for this project, if you find any bug or have idea for improvement - feel free to submit an issue.
 
-* ~~RWD - need to create proper mobile version~~~*DONE 7.09.19 - mobile version finished*
+* ~~RWD - need to create proper mobile version~~ *DONE 7.09.19 - mobile version finished*
 * Error handling for API requests- currently there is none :/
 * ~~User is logged out after every refresh~~ *DONE 19.08.19 - basic fix with localstorage*
 * Routing doesn't work properly on Heroku deployed build
